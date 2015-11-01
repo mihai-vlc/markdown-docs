@@ -6,6 +6,7 @@
     <title>{{page_title}}</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
@@ -17,9 +18,11 @@
                 <a class="navbar-brand" href="/">Documentation</a>
             </div>
             <!-- Search form -->
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" action="/" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control search-input" placeholder="Search">
+                    <input type="text" name="search"
+                        class="form-control search-input"
+                        placeholder="Search">
                 </div>
             </form>
         </div>
@@ -29,6 +32,7 @@
 
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/prism.js"></script>
 </body>
 
 </html>

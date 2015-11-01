@@ -6,7 +6,7 @@ body {
     padding-top: 50px;
 }
 
-a:visited, a:focus, a:hover, a:active {
+.nav-sidebar a:visited, a:focus, a:hover {
     color: #AA0055;
 }
 
@@ -46,6 +46,11 @@ a:visited, a:focus, a:hover, a:active {
     display: inline;
 }
 
+.nav-sidebar .nav > li > a.active {
+    font-weight: bold;
+    color: #000;
+}
+
 .nav-sidebar .nav > li > a:focus,
 .nav-sidebar .nav > li > a:hover {
     background: transparent;
@@ -56,4 +61,14 @@ a:visited, a:focus, a:hover, a:active {
     padding-left: 20px;
 }
 
+.main-content {
+    padding-top: 20px;
+    overflow: auto;
+    height: 100%;
+}
 
+.list-item-info {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #aaa;
+}

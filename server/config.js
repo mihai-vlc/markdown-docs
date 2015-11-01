@@ -1,5 +1,6 @@
 module.exports = {
     port: 3000,
     theme: __dirname + '/../themes/default',
-    contentFolder: __dirname + '/../content'
+    contentFolder: __dirname + '/../content',
+    excerpt_length: 400
 };

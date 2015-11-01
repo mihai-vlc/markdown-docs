@@ -1,0 +1,30 @@
+<div class="container-fluid h100">
+    <div class="row h100">
+        <div class="col-sm-3 nav-sidebar h100">
+            <div class="nav-sidebar-header">PAGES TREE</div>
+            {{> navigation }}
+        </div>
+
+        <div class="col-sm-9 main-content">
+            {{^hasResults}}
+                <h4>No results found for {{query}}</h4>
+            {{/hasResults}}
+
+            {{#hasResults}}
+
+            <h4>{{results.length}} result(s) were found for <strong>{{query}}</strong></h4>
+            <div class="list-group">
+                {{#results}}
+                    <a class="list-group-item" href="{{href}}">
+                        <h4 class="list-group-item-heading">{{name}}</h4>
+                        <div class="list-group-item-text">
+                            {{description}}
+                            <div class="list-item-info">Last modified: 12 Oct</div>
+                        </div>
+                    </a>
+                {{/results}}
+            </ul>
+            {{/hasResults}}
+        </div>
+    </div>
+</div>

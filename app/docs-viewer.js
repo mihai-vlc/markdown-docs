@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var stringUtils = require('underscore.string');
 var marked = require('marked');
+var lunr = require('lunr');
 
 function getPageNotFound() {
     return {
@@ -25,9 +26,10 @@ function getPage(id) {
     return {
         template: 'page',
         page_title: 'My First Page',
+        pageId: id,
         content: getPageContent(filePath),
         hasNavItems: true,
-        navItems : getSidebarNavigation(config.contentFolder, config.contentFolder)
+        navItems : getSidebarNavigation(config.contentFolder, id)
     };
 }
 
@@ -42,11 +44,43 @@ function getPageContent(filePath) {
 }
 
 function searchPages(query) {
+    var files = glob.sync(path.join(config.contentFolder, '**/*.md'));
+    var idx = lunr(function(){
+        this.field('title', { boost: 10 });
+        this.field('body');
+    });
+    var cache = {};
 
+
+    files.forEach(function (file) {
+        var id = getNavItemLink(file);
+        var title = getNavItemName(file);
+        var content = fs.readFileSync(file, 'utf-8');
+
+        idx.add({
+            'id': id,
+            'title': title,
+            'body': content
+        });
+
+        cache[id] = {
+            href: id,
+            name: title,
+            description: stringUtils.prune(content, config.excerpt_length)
+        };
+    });
+
+    var results = idx.search(query).map(function (item) {
+        return cache[item.ref];
+    });
 
     return {
         template: 'search',
-        results: []
+        hasResults: results.length > 0,
+        results: results,
+        query: query,
+        hasNavItems: true,
+        navItems : getSidebarNavigation(config.contentFolder)
     };
 }
 
@@ -57,7 +91,7 @@ function getHomePage() {
     }
 }
 
-var getSidebarNavigation = function(dir, contentFolder) {
+var getSidebarNavigation = function(dir, activePage) {
     var results = [];
     var list = fs.readdirSync(dir);
     var navItems;
@@ -68,7 +102,7 @@ var getSidebarNavigation = function(dir, contentFolder) {
         var stat = fs.statSync(file);
 
         if (stat && stat.isDirectory()) {
-            navItems = getSidebarNavigation(file, contentFolder);
+            navItems = getSidebarNavigation(file, activePage);
             results.push({
                 name: getNavItemName(file),
                 href: '#',
@@ -81,10 +115,11 @@ var getSidebarNavigation = function(dir, contentFolder) {
             if (path.extname(file) != '.md') {
                 return;
             }
-
+            var href = '/' + getNavItemLink(file);
             results.push({
                 name: getNavItemName(file),
-                href: getNavItemLink(file, contentFolder),
+                href: href,
+                cssClass: href == activePage ? 'active' : '',
                 hasNavItems: false
             });
         }
@@ -100,12 +135,13 @@ function getNavItemName(file) {
 }
 
 
-function getNavItemLink(file, contentFolder) {
+function getNavItemLink(file) {
     var fileName = path.basename(file, path.extname(file));
     var filePath = path.join(path.dirname(file), fileName);
 
-    return '/' + path.relative(contentFolder, filePath);
+    return path.relative(config.contentFolder, filePath).replace(/\\/g, '/');
 }
+
 
 module.exports = {
     getHomePage: getHomePage,

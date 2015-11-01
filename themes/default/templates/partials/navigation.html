@@ -2,7 +2,7 @@
 <ul class="nav nav-list">
     {{#navItems}}
     <li>
-        <a href="{{href}}"{{#hasNavItems}} class="nav-folder"{{/hasNavItems}}>{{name}}</a>
+        <a href="{{href}}"  class="{{cssClass}} {{#hasNavItems}} nav-folder {{/hasNavItems}}">{{name}}</a>
         {{> navigation }}
     </li>
     {{/navItems}}
