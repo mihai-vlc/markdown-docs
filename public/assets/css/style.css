@@ -1,0 +1,20 @@
+body {
+    padding-top: 50px;
+}
+
+.navbar-default {
+    background: #2C323D;
+    border-color: #2C323D;
+}
+
+.navbar-default .navbar-brand {
+    color: #eee;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #bbb;
+}
+
+.navbar-default .search-input {
+    min-width: 270px;
+}

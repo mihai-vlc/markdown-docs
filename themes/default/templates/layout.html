@@ -4,10 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{page_title}}</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
+
 <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Documentation</a>
+            </div>
+            <!-- Search form -->
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control search-input" placeholder="Search">
+                </div>
+            </form>
+        </div>
+    </nav>
 
     {{{ yield }}}
 
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 </body>
+
 </html>
