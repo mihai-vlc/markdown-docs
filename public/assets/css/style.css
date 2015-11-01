@@ -1,5 +1,17 @@
+html, body {
+    height: 100%;
+}
+
 body {
     padding-top: 50px;
+}
+
+a:visited, a:focus, a:hover, a:active {
+    color: #AA0055;
+}
+
+.h100 {
+    height: 100% !important;
 }
 
 .navbar-default {
@@ -18,3 +30,30 @@ body {
 .navbar-default .search-input {
     min-width: 270px;
 }
+
+.nav-sidebar {
+    background: #f5f5f5;
+    overflow: auto;
+}
+
+.nav-sidebar .nav-sidebar-header {
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.nav-sidebar .nav > li > a {
+    padding: 0;
+    display: inline;
+}
+
+.nav-sidebar .nav > li > a:focus,
+.nav-sidebar .nav > li > a:hover {
+    background: transparent;
+    text-decoration: underline;
+}
+
+.nav-sidebar .nav .nav {
+    padding-left: 20px;
+}
+
+

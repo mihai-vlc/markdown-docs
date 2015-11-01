@@ -11,6 +11,7 @@ app.use('/uploads', express.static('public/uploads'));
 // use hogan-express to render the templates
 app.set('view engine', 'html');
 app.set('layout', 'layout');
+app.set('partials', {'navigation' : 'partials/navigation'});
 // app.enable('view cache');
 app.set('views', path.join(config.theme, 'templates'));
 app.engine('html', hoganExpress);
