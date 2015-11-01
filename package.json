@@ -1,0 +1,21 @@
+{
+  "name": "docs-viewer",
+  "version": "1.0.0",
+  "description": "A markdown powered knowledgebase.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "keywords": [
+    "docs",
+    "viewer",
+    "markdown"
+  ],
+  "author": "Mihai Ionut Vilcu <ionutvmi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "hogan-express": "^0.5.2"
+  }
+}
