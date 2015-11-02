@@ -6,7 +6,7 @@ body {
     padding-top: 50px;
 }
 
-.nav-sidebar a:visited, a:focus, a:hover {
+.nav-sidebar a:visited, a:hover {
     color: #AA0055;
 }
 
@@ -54,6 +54,9 @@ body {
 .nav-sidebar .nav > li > a:focus,
 .nav-sidebar .nav > li > a:hover {
     background: transparent;
+}
+
+.nav-sidebar .nav > li > a:hover {
     text-decoration: underline;
 }
 
@@ -75,4 +78,9 @@ body {
 
 .nav-folder {
     font-style: italic;
+}
+
+
+.markdown-body blockquote {
+    font-size: inherit;
 }
