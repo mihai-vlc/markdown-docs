@@ -96,7 +96,7 @@ var getSidebarNavigation = function(dir, activePage) {
     var list = fs.readdirSync(dir);
     var navItems;
 
-    list.forEach(function(file) {
+    list.filter(isNotHiddenItem).forEach(function(file) {
         file = path.join(dir, file);
 
         var stat = fs.statSync(file);
@@ -128,6 +128,15 @@ var getSidebarNavigation = function(dir, activePage) {
     return results;
 }
 
+
+function isNotHiddenItem(el) {
+    // hidden files/dirs
+    if (path.basename(el)[0] == '.') {
+        return false;
+    }
+
+    return true;
+}
 
 function getNavItemName(file) {
     var fileName = path.basename(file, path.extname(file));
