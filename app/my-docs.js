@@ -9,7 +9,7 @@ var lunr = require('lunr');
 
 // markdown plugins
 md.use(require('markdown-it-checkbox'));
-
+md.use(require('markdown-it-toc'));
 
 function getPageNotFound() {
     return {
@@ -96,7 +96,7 @@ function searchPages(query) {
 
 function getHomePage() {
     return {
-        template: 'index',
+        template: 'page',
         page_title: 'Documentation Home',
         content: getPageContent(config.readme),
         hasNavItems: true,

@@ -3,6 +3,8 @@
 MyDocs is a markdown powered knowledgebase.  
 This is meant to allow for an organized and searchable personal documentation.
 
+@[toc](Table of Contents)
+
 
 ### Installation
 
@@ -37,7 +39,7 @@ your documentation.
 
 #### General text formatting
 
-```
+```markdown
 ~~Strikethrough~~
 *This text will be italic*
 _This will also be italic_
@@ -99,13 +101,13 @@ Content Cell  | Content Cell
 ```
 Note: Using `:` on the header row you can define the alignement.
 
-### Inline code
+#### Inline code
 ```
 I think you should use an
 `<addr>` element here instead.
 ```
 
-### Checkboxes
+#### Checkboxes
 ```
 - [x] this is a complete item
 - [ ] this is an incomplete item
@@ -129,9 +131,17 @@ ___
 Underscores
 ```
 
+#### Table of contents
+
+```
+@[toc](Table of Contents)
+```
+
 ### Libraries used
 
 - [markdown-it](https://github.com/markdown-it/markdown-it)
+- [markdown-it-checkbox](https://github.com/mcecot/markdown-it-checkbox)
+- [markdown-it-toc](https://github.com/samchrisinger/markdown-it-toc)
 - [express JS](http://expressjs.com/)
 - [glob](https://www.npmjs.com/package/glob)
 - [hogan-express](https://github.com/vol4ok/hogan-express)

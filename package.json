@@ -21,6 +21,7 @@
     "lunr": "^0.6.0",
     "markdown-it": "^5.0.1",
     "markdown-it-checkbox": "^1.1.0",
+    "markdown-it-toc": "^1.1.0",
     "underscore.string": "^3.2.2"
   }
 }
