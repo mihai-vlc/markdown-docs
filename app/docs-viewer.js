@@ -3,7 +3,7 @@ var glob = require('glob');
 var path = require('path');
 var fs = require('fs');
 var stringUtils = require('underscore.string');
-var marked = require('marked');
+var md = require('markdown-it')(config.markdown);
 var lunr = require('lunr');
 
 function getPageNotFound() {
@@ -40,7 +40,7 @@ function getPagePath(id) {
 function getPageContent(filePath) {
     var content = fs.readFileSync(filePath, 'utf-8');
 
-    return marked(content);
+    return md.render(content);
 }
 
 function searchPages(query) {
