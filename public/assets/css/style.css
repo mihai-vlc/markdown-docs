@@ -117,6 +117,16 @@ body {
     font-size: inherit;
 }
 
+.markdown-body label {
+    font-weight: normal;
+    display: inline;
+    margin: 0;
+}
+
+.markdown-body input[type="checkbox"] {
+    margin-right: 5px;
+}
+
 .list-item-info {
     font-size: 12px;
     margin-top: 10px;

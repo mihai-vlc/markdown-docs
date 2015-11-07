@@ -33,8 +33,7 @@ form the indexing in order to allow for static files (images, documents) to be l
 your documentation.
 
 
-### Quick reference
-
+## Quick reference
 
 #### General text formatting
 
@@ -71,8 +70,15 @@ _You **can** combine them_
 #### Images and Links
 
 ```
+Links:
+[click here](http://example.com)
+
+Images
 ![GitHub Logo](/images/logo.png)
 Format: ![Alt Text](url)
+
+Combined
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 ```
 
 #### Blockquotes
@@ -92,6 +98,36 @@ Content Cell  | Content Cell
 Content Cell  | Content Cell
 ```
 Note: Using `:` on the header row you can define the alignement.
+
+### Inline code
+```
+I think you should use an
+`<addr>` element here instead.
+```
+
+### Checkboxes
+```
+- [x] this is a complete item
+- [ ] this is an incomplete item
+```
+
+#### Horizontal separators
+
+```
+Three or more...
+
+---
+
+Hyphens
+
+***
+
+Asterisks
+
+___
+
+Underscores
+```
 
 ### Libraries used
 

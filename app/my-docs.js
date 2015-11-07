@@ -6,6 +6,11 @@ var stringUtils = require('underscore.string');
 var md = require('markdown-it')(config.markdown);
 var lunr = require('lunr');
 
+
+// markdown plugins
+md.use(require('markdown-it-checkbox'));
+
+
 function getPageNotFound() {
     return {
         template: 'error',
