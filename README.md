@@ -40,7 +40,6 @@ your documentation.
 - [glob](https://www.npmjs.com/package/glob)
 - [hogan-express](https://github.com/vol4ok/hogan-express)
 - [lunr](http://lunrjs.com/)
-- [lunr](http://lunrjs.com/)
 - [underscore.string](https://github.com/epeli/underscore.string)
 - [prismJS](http://prismjs.com/)
 - [jQuery](http://jquery.com)
