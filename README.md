@@ -4,10 +4,23 @@ MyDocs is a markdown powered knowledgebase.
 This is meant to allow for an organized and searchable personal documentation.
 
 
+### Installation
+
+Clone this repo, install the node modules and create the content folder.
+```js
+git clone https://github.com/ionutvmi/my-docs.git
+cd my-docs
+npm install
+mkdir content
+```
+
+After that you can add your own md files in the content folder.  
+
+
 ### How to use ?
 
 In order to view the content from the documentation you need to
-place your markdown files into the `/content` folder.
+place your markdown files (.md) into the `/content` folder.
 
 To start the server cd into the root location of this application and
 run `npm start`.
