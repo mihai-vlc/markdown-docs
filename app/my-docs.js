@@ -44,7 +44,12 @@ function getPageContent(filePath) {
 }
 
 function searchPages(query) {
-    var files = glob.sync(path.join(config.contentFolder, '**/*.md'));
+    var content = path.join(config.contentFolder, '**/*.md');
+    var ignored = path.join(config.contentFolder, 'UPLOADS/**/*.*');
+    var files = glob.sync(content, {
+        ignore: ignored
+    });
+
     var idx = lunr(function(){
         this.field('title', { boost: 10 });
         this.field('body');
@@ -87,7 +92,10 @@ function searchPages(query) {
 function getHomePage() {
     return {
         template: 'index',
-        page_title: 'Documentation Home'
+        page_title: 'Documentation Home',
+        content: getPageContent(config.readme),
+        hasNavItems: true,
+        navItems : getSidebarNavigation(config.contentFolder)
     }
 }
 
@@ -132,6 +140,11 @@ var getSidebarNavigation = function(dir, activePage) {
 function isNotHiddenItem(el) {
     // hidden files/dirs
     if (path.basename(el)[0] == '.') {
+        return false;
+    }
+
+    // uploads folder
+    if (path.basename(el) == 'UPLOADS') {
         return false;
     }
 

@@ -3,10 +3,10 @@ var app = express();
 var config = require('./config');
 var hoganExpress = require('hogan-express');
 var path = require('path');
-var docsViewer = require('../app/docs-viewer');
+var myDocs = require('../app/my-docs');
 
 app.use('/assets', express.static('public/assets'));
-app.use('/uploads', express.static('public/uploads'));
+app.use('/content/UPLOADS', express.static('content/UPLOADS'));
 
 // use hogan-express to render the templates
 app.set('view engine', 'html');
@@ -22,15 +22,15 @@ app.get('*', function(req, res){
 
     if (req.query.search) {
         // do the search logic
-        page = docsViewer.searchPages(req.query.search);
+        page = myDocs.searchPages(req.query.search);
 
     } else if (req.params[0]) {
         // render the documentation page
-        page = docsViewer.getPage(req.params[0]);
+        page = myDocs.getPage(req.params[0]);
 
     } else {
         // index page
-        page = docsViewer.getHomePage();
+        page = myDocs.getHomePage();
     }
 
     res.render(page.template, page);
