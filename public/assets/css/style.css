@@ -107,7 +107,7 @@ body {
 /*** General content ***/
 .main-content {
     padding-top: 20px;
-    padding-bottom: 70px;
+    padding-bottom: 50vh;
     overflow: auto;
     height: 100%;
 }
@@ -137,4 +137,8 @@ body {
     display: inline-block;
     padding: 0.4em .6em;
     text-transform: uppercase;
+}
+
+[autofocus] {
+    outline: none;
 }

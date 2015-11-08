@@ -11,5 +11,6 @@ $(function () {
         return this.hostname != window.location.hostname;
     }).attr('target', '_blank');
 
+    $('[autofocus]').focus();
 
 }());
