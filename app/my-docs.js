@@ -58,7 +58,9 @@ function searchPages(query) {
     var idx = lunr(function(){
         this.field('title', { boost: 10 });
         this.field('body');
+        this.pipeline.remove(lunr.stopWordFilter);
     });
+
     var cache = {};
 
 
@@ -76,7 +78,8 @@ function searchPages(query) {
         cache[id] = {
             href: id,
             name: title,
-            description: stringUtils.prune(content, config.excerpt_length)
+            description: stringUtils.prune(content, config.excerpt_length),
+            date: fs.statSync(file).mtime
         };
     });
 
@@ -139,7 +142,7 @@ var getSidebarNavigation = function(dir, activePage) {
     });
 
     return results;
-}
+};
 
 
 function isNotHiddenItem(el) {
