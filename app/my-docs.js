@@ -206,9 +206,15 @@ function commit() {
             cwd: config.contentFolder
         });
 
-        childProcess.execSync('git commit -m "Automatic commit by web app"', {
+        var status = childProcess.execSync('git status --porcelain', {
             cwd: config.contentFolder
-        });
+        }).toString();
+
+        if (status) {
+            childProcess.execSync('git commit -m "Automatic commit by web app"', {
+                cwd: config.contentFolder
+            });
+        }
 
         // childProcess.execSync('git push origin master', {
         //     cwd: config.contentFolder

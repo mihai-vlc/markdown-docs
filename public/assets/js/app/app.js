@@ -1,4 +1,4 @@
-define(['jquery', 'app/page-actions', 'prism', 'bootstrap'], function ($, pageActions, Prism) {
+define(['jquery', 'app/page-actions', 'prism', 'app/notify', 'bootstrap'], function ($, pageActions, Prism, notify) {
 
 
     function init () {
@@ -30,6 +30,9 @@ define(['jquery', 'app/page-actions', 'prism', 'bootstrap'], function ($, pageAc
 
         // highlight the code areas
         Prism.highlightAll();
+
+        // initialize the notifications
+        notify.init();
     }
 
     return {

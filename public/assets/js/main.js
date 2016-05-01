@@ -3,7 +3,9 @@ require.config({
     paths: {
       'jquery': 'lib/jquery.min',
       'prism': 'lib/prism',
-      'bootstrap': 'lib/bootstrap.min'
+      'bootstrap': 'lib/bootstrap.min',
+      'lobibox': 'lib/lobibox/lobibox.min',
+      'messagebox': 'lib/lobibox/messageboxes.min'
     },
     packages: [{
         name: "codemirror",
@@ -14,6 +16,10 @@ require.config({
         'bootstrap': ['jquery'],
         'prism': {
             exports: 'Prism'
+        },
+        'messagebox': {
+            deps: ['jquery', 'lobibox'],
+            exports: 'Lobibox'
         }
     }
 });

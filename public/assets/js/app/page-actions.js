@@ -24,9 +24,12 @@ define(['jquery', 'app/notify'], function ($, notify) {
             } else if (action == 'delete') {
                 if ( ! pageId) {
                     notify.error('This page is not editable !');
-                } else if (confirm('Are you sure you want to delete this page ?')) {
-                    deletePage(pageId, function() {
-                        window.location.href = '/';
+                } else {
+                    notify.confirm("Are you sure you want to delete this page ?", function() {
+                        deletePage(pageId, function() {
+                            window.location.href = '/';
+                            notify.deffered('success', 'The page ' + pageId + ' was deleted !');
+                        });
                     });
                 }
             }
@@ -54,10 +57,10 @@ define(['jquery', 'app/notify'], function ($, notify) {
             url: '/commit',
             type: 'POST',
             success: function() {
-                notify.info('The data was commited and pushed successfully !');
+                notify.success('The changes were committed successfully !');
             },
             error: function  () {
-                notify.error('There was an error with commiting the data !');
+                notify.error('There was an error with committing the data !');
             }
         })
     }
@@ -130,7 +133,7 @@ define(['jquery', 'app/notify'], function ($, notify) {
                     content: $modalEl.find('.js-editor').val()
                 },
                 success: function () {
-                    notify.info('The page was saved successfully !');
+                    notify.deffered('success', 'The page ' + pageId + ' was saved successfully !');
                     $modalEl.modal('hide');
                     window.location.href = window.location.origin + '/' + pageId;
                 },
