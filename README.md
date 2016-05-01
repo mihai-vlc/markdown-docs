@@ -5,6 +5,13 @@ This is meant to allow for an organized and searchable personal documentation.
 
 @[toc](Table of Contents)
 
+### Features
+- collapsable sidebar
+- create/edit/detele pages from the web interface
+- commit changes from the web interface
+- search in the provided content
+- sidebar with a tree view of the documents
+- upload via drag&drop or paste
 
 ### Installation
 
@@ -171,3 +178,7 @@ Underscores
 - [prismJS](http://prismjs.com/)
 - [jQuery](http://jquery.com)
 - [Bootstrap](http://getbootstrap.com/)
+- [RequireJS](http://requirejs.org/)
+- [CodeMirror](https://codemirror.net/)
+- [Lobibox](http://lobianijs.com/site/lobibox)
+- [Inline Attachment](http://git.razko.nl/InlineAttachment)
