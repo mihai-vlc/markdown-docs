@@ -114,7 +114,7 @@ define(['jquery', 'app/notify'], function ($, notify) {
             });
         });
 
-        $modalEl.modal();
+        $modalEl.modal({backdrop: 'static', keyboard: false});
 
         $modalEl.on('hidden.bs.modal', function () {
             $modalEl.remove();

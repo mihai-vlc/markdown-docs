@@ -12,6 +12,7 @@ This is meant to allow for an organized and searchable personal documentation.
 - search in the provided content
 - sidebar with a tree view of the documents
 - upload via drag&drop or paste
+- auto table of contents
 
 ### Installation
 
