@@ -4,6 +4,19 @@ var config = require('./config');
 var hoganExpress = require('hogan-express');
 var path = require('path');
 var myDocs = require('../app/my-docs');
+var multer  = require('multer');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(config.contentFolder, 'UPLOADS'));
+  },
+  filename: function (req, file, cb) {
+    var name = file.originalname;
+    cb(null, 'uploaded-' + Date.now() + path.extname(name));
+  }
+})
+
+var upload = multer({ storage: storage })
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -63,6 +76,7 @@ app.get('*', function(req, res){
 
 });
 
+// handle the page actions
 app.post('/save-page', function (req, res) {
 
     if (req.body.pageId && myDocs.savePage(req.body.oldPageId, req.body.pageId, req.body.content)) {
@@ -104,6 +118,13 @@ app.post('/delete-page', function (req, res) {
     } else {
         res.status(500).end();
     }
+});
+
+// handle the file upload
+app.post('/upload', upload.single('file'), function (req, res) {
+    res.json({
+        filename: '/content/UPLOADS/' + req.file.filename
+    });
 });
 
 // start the server

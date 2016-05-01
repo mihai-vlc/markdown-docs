@@ -5,7 +5,8 @@ require.config({
       'prism': 'lib/prism',
       'bootstrap': 'lib/bootstrap.min',
       'lobibox': 'lib/lobibox/lobibox.min',
-      'messagebox': 'lib/lobibox/messageboxes.min'
+      'messagebox': 'lib/lobibox/messageboxes.min',
+      'inline-attachment': 'lib/inline-attachment'
     },
     packages: [{
         name: "codemirror",
@@ -20,6 +21,9 @@ require.config({
         'messagebox': {
             deps: ['jquery', 'lobibox'],
             exports: 'Lobibox'
+        },
+        'inline-attachment': {
+            exports: 'inlineAttachment'
         }
     }
 });

@@ -1,7 +1,11 @@
-define(['jquery', 'codemirror', 'codemirror/keymap/sublime', 'codemirror/mode/gfm/gfm',
+define(['jquery', 'codemirror', 'inline-attachment',
+    'codemirror/keymap/sublime',
+    'codemirror/mode/gfm/gfm',
     'codemirror/addon/selection/active-line',
+    'codemirror/addon/dialog/dialog',
+    'codemirror/addon/search/search',
     'codemirror/addon/selection/selection-pointer'
-    ], function  ($, CodeMirror) {
+    ], function  ($, CodeMirror, inlineAttachment) {
 
     return {
         init: function (textarea, content) {
@@ -21,6 +25,10 @@ define(['jquery', 'codemirror', 'codemirror/keymap/sublime', 'codemirror/mode/gf
                 editor.setValue(content);
             }
 
+            inlineAttachment.editors.codemirror4.attach(editor, {
+                uploadUrl: '/upload',
+                allowedTypes: '*'
+            });
 
             return editor;
         }

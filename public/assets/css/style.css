@@ -141,6 +141,7 @@ body {
 
 .CodeMirror {
     border: 1px solid #ccc;
+    height: 480px;
 }
 
 [autofocus] {
