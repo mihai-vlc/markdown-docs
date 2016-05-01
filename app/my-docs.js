@@ -5,7 +5,8 @@ var fs = require('fs');
 var stringUtils = require('underscore.string');
 var md = require('markdown-it')(config.markdown);
 var lunr = require('lunr');
-
+var Repository = require('git-cli').Repository;
+var childProcess = require('child_process');
 
 // markdown plugins
 md.use(require('markdown-it-checkbox'));
@@ -13,6 +14,7 @@ md.use(require('markdown-it-toc'));
 
 function getPageNotFound() {
     return {
+        status: 404,
         template: 'error',
         page_title: 'Documentation 404 Not Found'
     };
@@ -30,9 +32,10 @@ function getPage(id) {
 
     return {
         template: 'page',
-        page_title: 'My First Page',
+        page_title: path.basename(id),
         pageId: id,
         content: getPageContent(filePath),
+        data: getPageContent(filePath, true),
         hasNavItems: true,
         navItems : getSidebarNavigation(config.contentFolder, id)
     };
@@ -42,8 +45,12 @@ function getPagePath(id) {
     return path.join(config.contentFolder, id + '.md');
 }
 
-function getPageContent(filePath) {
+function getPageContent(filePath, noRender) {
     var content = fs.readFileSync(filePath, 'utf-8');
+
+    if (noRender) {
+        return content;
+    }
 
     return md.render(content);
 }
@@ -172,9 +179,63 @@ function getNavItemLink(file) {
     return path.relative(config.contentFolder, filePath).replace(/\\/g, '/');
 }
 
+function savePage(oldPageId, pageId, content) {
+    try {
+        fs.unlinkSync(getPagePath(oldPageId));
+        fs.writeFileSync(getPagePath(pageId), content, 'utf-8');
+
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function createPage(pageId, content) {
+    try {
+        fs.writeFileSync(getPagePath(pageId), content, 'utf-8');
+
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function commit() {
+    try {
+        childProcess.execSync('git add --all', {
+            cwd: config.contentFolder
+        });
+
+        childProcess.execSync('git commit -m "Automatic commit by web app"', {
+            cwd: config.contentFolder
+        });
+
+        childProcess.execSync('git push origin master', {
+            cwd: config.contentFolder
+        });
+
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function deletePage (pageId) {
+    try {
+        fs.unlinkSync(getPagePath(pageId));
+
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
 
 module.exports = {
     getHomePage: getHomePage,
     getPage: getPage,
-    searchPages: searchPages
+    searchPages: searchPages,
+    savePage: savePage,
+    createPage: createPage,
+    deletePage: deletePage,
+    commit: commit
 };

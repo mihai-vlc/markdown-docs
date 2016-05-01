@@ -139,6 +139,10 @@ body {
     text-transform: uppercase;
 }
 
+.CodeMirror {
+    border: 1px solid #ccc;
+}
+
 [autofocus] {
     outline: none;
 }

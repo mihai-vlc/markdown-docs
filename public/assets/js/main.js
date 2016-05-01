@@ -1,16 +1,25 @@
-$(function () {
+require.config({
+    baseUrl: '/assets/js',
+    paths: {
+      'jquery': 'lib/jquery.min',
+      'prism': 'lib/prism',
+      'bootstrap': 'lib/bootstrap.min'
+    },
+    packages: [{
+        name: "codemirror",
+        location: "lib/codemirror",
+        main: "lib/codemirror"
+    }],
+    shim: {
+        'bootstrap': ['jquery'],
+        'prism': {
+            exports: 'Prism'
+        }
+    }
+});
 
-	$('.nav-folder').on('click', function (e) {
-		e.preventDefault();
 
-        $(this).toggleClass('is-closed');
-		$(this).parent().children('.nav-list').slideToggle();
-	});
+require(['app/app'], function (app) {
+    app.init();
+});
 
-    $(document.links).filter(function() {
-        return this.hostname != window.location.hostname;
-    }).attr('target', '_blank');
-
-    $('[autofocus]').focus();
-
-}());

@@ -14,6 +14,8 @@ git clone https://github.com/ionutvmi/my-docs.git
 cd my-docs
 npm install
 mkdir content
+cd content
+git init
 ```
 
 After that you can add your own md files in the content folder.  

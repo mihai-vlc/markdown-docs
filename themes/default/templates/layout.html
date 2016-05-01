@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/assets/css/prism.css">
     <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/codemirror.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
@@ -20,6 +21,24 @@
             </div>
             <!-- Search form -->
             <form class="navbar-form navbar-right" action="/" role="search">
+                <div class="btn-group" role="group">
+                    <button type="button" data-action="edit" class="btn js-edit-action-btn btn-default">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        Edit
+                    </button>
+                    <button type="button" data-action="new-page" class="btn js-edit-action-btn btn-success">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        New Page
+                    </button>
+                    <button type="button" data-action="commit" class="btn js-edit-action-btn btn-primary">
+                        <i class="glyphicon glyphicon-cloud-upload"></i>
+                        Commit
+                    </button>
+                    <button type="button" data-action="delete" class="btn js-edit-action-btn btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        Delete
+                    </button>
+                </div>
                 <div class="form-group">
                     <input type="text" name="search"
                         class="form-control search-input"
@@ -31,10 +50,9 @@
 
     {{{ yield }}}
 
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/prism.js"></script>
-    <script src="/assets/js/main.js"></script>
+    <script data-main="/assets/js/main" src="/assets/js/require.js"></script>
+
+    {{> modal }}
 </body>
 
 </html>
