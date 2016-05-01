@@ -210,9 +210,9 @@ function commit() {
             cwd: config.contentFolder
         });
 
-        childProcess.execSync('git push origin master', {
-            cwd: config.contentFolder
-        });
+        // childProcess.execSync('git push origin master', {
+        //     cwd: config.contentFolder
+        // });
 
         return true;
     } catch (e) {
