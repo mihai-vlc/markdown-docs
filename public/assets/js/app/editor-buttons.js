@@ -36,9 +36,13 @@ define(['jquery'], function ($) {
                     label: '&lt;/&gt;',
                     callback: function (cm) {
                         var selection = cm.getSelection();
-                        console.log(selection);
-                        cm.replaceSelection("\n```\n" + selection + "\n```\n");
-                        if (!selection) {
+                        if (selection.indexOf('\n') > -1 || ! selection) {
+                            cm.replaceSelection("\n```\n" + selection + "\n```\n");
+                        } else {
+                            cm.replaceSelection("`" + selection + "`");
+                        }
+
+                        if ( ! selection) {
                             var cursorPos = cm.getCursor();
                             cm.setCursor(cursorPos.line - 2, 0);
                         }
