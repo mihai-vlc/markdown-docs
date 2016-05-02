@@ -20,7 +20,23 @@
 
                         <div class="form-group">
                             <label>Page content</label>
-                            <textarea class="js-editor"></textarea>
+
+                            <ul class="nav nav-tabs edtior-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#text-view" role="tab" data-toggle="tab">Text</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#preview-panel" role="tab" data-toggle="tab">Preview</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="text-view">
+                                    <textarea class="js-editor"></textarea>
+                                </div>
+                                <div role="tabpanel" class="tab-pane markdown-body" id="preview-panel" data-loading-text="Loading...">
+                                </div>
+                            </div>
                         </div>
 
                     </div>

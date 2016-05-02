@@ -236,6 +236,10 @@ function deletePage (pageId) {
     }
 }
 
+function generatePreview (content) {
+    return md.render(content);
+}
+
 module.exports = {
     getHomePage: getHomePage,
     getPage: getPage,
@@ -243,5 +247,6 @@ module.exports = {
     savePage: savePage,
     createPage: createPage,
     deletePage: deletePage,
+    generatePreview: generatePreview,
     commit: commit
 };

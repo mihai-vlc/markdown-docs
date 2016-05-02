@@ -25,6 +25,7 @@
     wrap.style.width = "";
     wrap.style.height = "auto";
     wrap.className += " CodeMirror-fullscreen";
+    document.body.className += " CodeMirror-fullscreen-fix";
     document.documentElement.style.overflow = "hidden";
     cm.refresh();
   }
@@ -32,6 +33,7 @@
   function setNormal(cm) {
     var wrap = cm.getWrapperElement();
     wrap.className = wrap.className.replace(/\s*CodeMirror-fullscreen\b/, "");
+    document.body.className = document.body.className.replace(/\s*CodeMirror-fullscreen-fix\b/, "");
     document.documentElement.style.overflow = "";
     var info = cm.state.fullScreenRestore;
     wrap.style.width = info.width; wrap.style.height = info.height;

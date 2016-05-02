@@ -127,6 +127,20 @@ app.post('/upload', upload.single('file'), function (req, res) {
     });
 });
 
+// handle the preview request
+app.post('/preview', function (req, res) {
+    var content = req.body.content;
+    if (content) {
+        res.json({
+            success: true,
+            data: myDocs.generatePreview(content)
+        });
+    } else {
+        res.status(500).end();
+    }
+});
+
+
 // start the server
 var server = app.listen(config.port, function () {
     var info = server.address();
