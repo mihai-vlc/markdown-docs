@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
 var config = require('./config');
-var hoganExpress = require('hogan-express');
 var path = require('path');
-var myDocs = require('../app/my-docs');
+var mdocs = require('./mdocs');
 var multer  = require('multer');
 
 var storage = multer.diskStorage({
@@ -24,62 +23,30 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-app.use('/assets', express.static('public/assets'));
-app.use('/content/UPLOADS', express.static('content/UPLOADS'));
+app.use('/assets', express.static(path.resolve(__dirname + '/../assets')));
+app.use('/content/UPLOADS', express.static(path.resolve(__dirname + '/../content/UPLOADS')));
 
-// use hogan-express to render the templates
-app.set('view engine', 'html');
-app.set('layout', 'layout');
-app.set('partials', {
-    'navigation' : 'partials/navigation',
-    'modal' : 'partials/modal'
+app.get('/navigation', function (req, res) {
+    try {
+        res.json({
+            success: true,
+            navItems: mdocs.getNavigationItems()
+        });
+    } catch (e) {
+        res.status(500).end();
+    }
 });
-// app.enable('view cache');
-app.set('views', path.join(config.theme, 'templates'));
-app.engine('html', hoganExpress);
 
 // handle the pages requests
 app.get('*', function(req, res){
-    var page;
 
-    if (req.query.search) {
-        // do the search logic
-        page = myDocs.searchPages(req.query.search);
-
-    } else if (req.params[0]) {
-        // render the documentation page
-        page = myDocs.getPage(req.params[0]);
-
-        if (page.status) {
-            res.status(page.status);
-        }
-
-    } else {
-        // index page
-        page = myDocs.getHomePage();
-    }
-
-    if (req.query.format == 'source') {
-        res.json({
-            pageId: page.pageId,
-            content: page.data
-        });
-
-    } else if (req.query.format == 'ajax') {
-        page.layout = '';
-        res.render('ajax', page);
-
-    } else {
-        res.render(page.template, page);
-    }
-
-
+    res.sendFile('index.html', { root: path.join(__dirname, '../') });
 });
 
 // handle the page actions
 app.post('/save-page', function (req, res) {
 
-    if (req.body.pageId && myDocs.savePage(req.body.oldPageId, req.body.pageId, req.body.content)) {
+    if (req.body.pageId && mdocs.savePage(req.body.oldPageId, req.body.pageId, req.body.content)) {
         res.json({
             success: true
         });
@@ -89,7 +56,7 @@ app.post('/save-page', function (req, res) {
 });
 
 app.post('/commit', function (req, res) {
-    if (myDocs.commit()) {
+    if (mdocs.commit()) {
         res.json({
             success: true
         });
@@ -100,7 +67,7 @@ app.post('/commit', function (req, res) {
 
 app.post('/create-page', function (req, res) {
 
-    if (req.body.pageId && myDocs.createPage(req.body.pageId, req.body.content)) {
+    if (req.body.pageId && mdocs.createPage(req.body.pageId, req.body.content)) {
         res.json({
             success: true
         });
@@ -111,7 +78,7 @@ app.post('/create-page', function (req, res) {
 
 app.post('/delete-page', function (req, res) {
 
-    if (req.body.pageId && myDocs.deletePage(req.body.pageId)) {
+    if (req.body.pageId && mdocs.deletePage(req.body.pageId)) {
         res.json({
             success: true
         });
@@ -133,7 +100,7 @@ app.post('/preview', function (req, res) {
     if (content) {
         res.json({
             success: true,
-            data: myDocs.generatePreview(content)
+            data: mdocs.generatePreview(content)
         });
     } else {
         res.status(500).end();
