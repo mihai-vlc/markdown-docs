@@ -6,6 +6,8 @@ define([
 
     var app = {
 
+        events: _.extend({}, Backbone.Events),
+
         init: function() {
             var appView = new AppView();
 
@@ -14,7 +16,9 @@ define([
                 pushState: true
             });
         }
-    }
+    };
+
+    window.app = app;
 
     return app;
 });

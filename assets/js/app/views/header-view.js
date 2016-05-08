@@ -12,8 +12,20 @@ define([
         },
 
         events: {
-            'submit form': 'handleSearch'
+            'submit form': 'handleSearch',
+            'click a.js-nav': 'handleNavigate'
         },
+
+        handleNavigate: function(event) {
+            event.preventDefault();
+            var pageId = $(event.currentTarget).attr('href');
+            if ( ! pageId || pageId == '#') {
+                return;
+            }
+
+            Backbone.history.navigate(pageId, {trigger: true});
+        },
+
 
         handleSearch: function(event) {
             event.preventDefault();

@@ -14,14 +14,17 @@ define([
             this.model.on('sync', this.render, this);
             this.model.on('error', this.handleError, this);
             this.model.fetch();
+
+            app.events.on('pageLoaded', this.activateItem.bind(this));
+        },
+
+
+        handleError: function() {
+            notify.error('There was an error with loading the navigation.');
         },
 
         events: {
             'click a': 'handleNavigate'
-        },
-
-        handleError: function() {
-            notify.error('There was an error with loading the navigation.');
         },
 
         handleNavigate: function(event) {
@@ -32,10 +35,14 @@ define([
             }
 
             Backbone.history.navigate(pageId, {trigger: true});
-            this.activateItem(pageId);
         },
 
         activateItem: function(id) {
+            // ensure the id starts with /
+            if (id[0] != '/') {
+                id = '/' + id;
+            }
+
             this.$el.find('a.active').removeClass('active');
             this.$el.find('a[href="' + id + '"]').addClass('active');
         },

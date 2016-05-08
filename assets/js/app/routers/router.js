@@ -15,9 +15,12 @@ define([
 
         loadPage: function(pageId) {
             this.appView.loadPage(pageId);
+            app.events.trigger('pageLoaded', pageId);
         },
 
         searchPages: function(queryString) {
+            app.events.trigger('pageLoaded', 'search-page');
+
             var params = URI.parseQuery(queryString);
 
             if (params.q) {
@@ -32,5 +35,3 @@ define([
 
     return router;
 });
-
-

@@ -49,6 +49,12 @@ define([
 
             this.$el.html(html);
             this.initContent();
+
+            app.events.trigger('pageContentLoaded', {
+                $el: this.$el,
+                id: this.model.attributes.id
+            });
+
             return this;
         }
     });
