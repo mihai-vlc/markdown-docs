@@ -5,7 +5,12 @@
                 <a class="navbar-brand" href="/">Documentation</a>
             </div>
             <!-- Search form -->
-            <form class="navbar-form navbar-right" action="/" role="search">
+            <form class="navbar-form navbar-right" action="/search" role="search">
+                <div class="form-group">
+                    <input type="text" name="search"
+                        class="form-control search-input"
+                        placeholder="Search">
+                </div>
                 <div class="btn-group" role="group">
                     <button type="button" data-action="edit" class="btn js-edit-action-btn btn-default">
                         <i class="glyphicon glyphicon-pencil"></i>
@@ -23,11 +28,6 @@
                         <i class="glyphicon glyphicon-trash"></i>
                         Delete
                     </button>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="search"
-                        class="form-control search-input"
-                        placeholder="Search">
                 </div>
             </form>
         </div>

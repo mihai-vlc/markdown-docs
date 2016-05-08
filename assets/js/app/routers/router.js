@@ -4,21 +4,20 @@ define([
 
     var router = Backbone.Router.extend({
         routes: {
-            'about(/)': 'loadAbout',
-            '*others': 'loadHome',
+            'search(/)': 'searchPage',
+            '*others': 'loadPage'
         },
 
         initialize: function (appView) {
             this.appView = appView;
         },
 
-        loadHome: function () {
-            console.log("this");
-            // this.appView.loadHome();
+        loadPage: function(pageId) {
+            this.appView.loadPage(pageId);
         },
 
-        loadAbout: function () {
-            this.appView.loadAbout();
+        searchPage: function() {
+            console.log('searchPage');
         }
 
     });

@@ -11,32 +11,39 @@ var childProcess = require('child_process');
 md.use(require('markdown-it-checkbox'));
 md.use(require('markdown-it-toc'));
 
-function getPageNotFound() {
-    return {
-        status: 404,
-        template: 'error',
-        page_title: 'Documentation 404 Not Found'
-    };
-}
 
 function getPage(id) {
     if (id === '/') {
         return getHomePage();
     }
-    var filePath = getPagePath(id);
 
-    if ( ! fs.existsSync(filePath)) {
+    if ( ! pageExists(id)) {
         return getPageNotFound();
     }
 
+    var filePath = getPagePath(id);
     return {
-        template: 'page',
-        page_title: path.basename(id),
-        pageId: id,
-        content: getPageContent(filePath),
-        data: getPageContent(filePath, true),
-        hasNavItems: true,
-        navItems : getSidebarNavigation(config.contentFolder, id)
+        pageTitle: path.basename(id),
+        content: getPageContent(filePath, { render: true })
+    };
+}
+
+function pageExists(id) {
+    var filePath = getPagePath(id);
+    return fs.existsSync(filePath);
+}
+
+function getHomePage() {
+    return {
+        pageTitle: 'Documentation Home',
+        content: getPageContent(config.readme, { render: true })
+    }
+}
+
+function getPageNotFound() {
+    return {
+        status: 404,
+        pageTitle: 'Error 404 Page Not Found'
     };
 }
 
@@ -44,14 +51,15 @@ function getPagePath(id) {
     return path.join(config.contentFolder, id + '.md');
 }
 
-function getPageContent(filePath, noRender) {
+function getPageContent(filePath, options) {
+    options = options || {};
     var content = fs.readFileSync(filePath, 'utf-8');
 
-    if (noRender) {
-        return content;
+    if (options.render) {
+        return md.render(content);
     }
 
-    return md.render(content);
+    return content;
 }
 
 function searchPages(query) {
@@ -94,26 +102,13 @@ function searchPages(query) {
     });
 
     return {
-        template: 'search',
-        hasResults: results.length > 0,
-        results: results,
-        query: query,
-        hasNavItems: true,
-        navItems : getSidebarNavigation(config.contentFolder)
+        results: results
     };
 }
 
-function getHomePage() {
-    return {
-        template: 'page',
-        page_title: 'Documentation Home',
-        content: getPageContent(config.readme),
-        hasNavItems: true,
-        navItems : getSidebarNavigation(config.contentFolder)
-    }
-}
 
-var getSidebarNavigation = function(dir, activePage) {
+function getNavigationItems(dir) {
+    dir = dir || config.contentFolder;
     var results = [];
     var list = fs.readdirSync(dir);
     var navItems;
@@ -124,11 +119,10 @@ var getSidebarNavigation = function(dir, activePage) {
         var stat = fs.statSync(file);
 
         if (stat && stat.isDirectory()) {
-            navItems = getSidebarNavigation(file, activePage);
+            navItems = getNavigationItems(file);
             results.push({
                 name: getNavItemName(file),
                 href: '#',
-                hasNavItems: navItems.length > 0,
                 navItems: navItems
             });
 
@@ -140,9 +134,7 @@ var getSidebarNavigation = function(dir, activePage) {
             var href = '/' + getNavItemLink(file);
             results.push({
                 name: getNavItemName(file),
-                href: href,
-                cssClass: href == activePage ? 'active' : '',
-                hasNavItems: false
+                href: href
             });
         }
     });
@@ -199,6 +191,16 @@ function createPage(pageId, content) {
     }
 }
 
+function deletePage(pageId) {
+    try {
+        fs.unlinkSync(getPagePath(pageId));
+
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 function commit() {
     try {
         childProcess.execSync('git add --all', {
@@ -225,27 +227,14 @@ function commit() {
     }
 }
 
-function deletePage (pageId) {
-    try {
-        fs.unlinkSync(getPagePath(pageId));
-
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
-function generatePreview (content) {
+function generatePreview(content) {
     return md.render(content);
-}
-
-function getNavigationItems() {
-    return getSidebarNavigation(config.contentFolder);
 }
 
 module.exports = {
     getHomePage: getHomePage,
     getPage: getPage,
+    pageExists: pageExists,
     searchPages: searchPages,
     savePage: savePage,
     createPage: createPage,

@@ -6,10 +6,15 @@ define([
     // views
     'app/views/header-view',
     'app/views/navigation-view',
-    'app/views/homepage-view',
-    'app/views/about-view'
+    'app/views/page-view',
+
+    // models
+    'app/models/page-model',
+    'app/models/navigation-model'
 ], function(Backbone, $, tpls,
-    HeaderView, NavigationView, HomepageView, AboutView
+    HeaderView, NavigationView, PageView,
+
+    PageModel, NavigationModel
    ) {
 
     var view = Backbone.View.extend({
@@ -17,38 +22,34 @@ define([
 
         views: {},
 
-        initialize: function () {
+        initialize: function() {
 
             this.views.header = new HeaderView({
                 el: '.js-app .header'
             }).render();
 
             this.views.header = new NavigationView({
-                el: '.js-app .nav-items-list'
-            }).reload();
+                el: '.js-app .nav-items-list',
+                model: new NavigationModel()
+            });
         },
 
-        render: function () {
-            this.$('.main-container')
+        render: function() {
+            this.$('.js-main-content')
                 .empty()
                 .append(this.activeView.render().el);
 
             return this;
         },
 
-        loadHome: function () {
+        loadPage: function(pageId) {
             this.clean();
-            this.activeView = new HomepageView();
+            var pageModel = new PageModel({ id: pageId });
+            this.activeView = new PageView({ model: pageModel });
             this.render();
         },
 
-        loadAbout: function () {
-            this.clean();
-            this.activeView = new AboutView();
-            this.render();
-        },
-
-        clean: function () {
+        clean: function() {
             if (this.activeView) {
                 this.activeView.remove();
             }
