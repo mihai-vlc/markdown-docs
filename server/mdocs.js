@@ -90,7 +90,7 @@ function searchPages(query) {
         });
 
         cache[id] = {
-            href: id,
+            href: '/' + id,
             name: title,
             description: stringUtils.prune(content, config.excerpt_length),
             date: fs.statSync(file).mtime
@@ -101,9 +101,7 @@ function searchPages(query) {
         return cache[item.ref];
     });
 
-    return {
-        results: results
-    };
+    return results;
 }
 
 

@@ -42,6 +42,13 @@ app.get('/loadPageData/:pageId(*)', function(req, res) {
     res.json(pageData);
 });
 
+app.get('/loadSearchResults', function(req, res) {
+    try {
+        res.json( mdocs.searchPages(req.query.q) );
+    } catch (e) {
+        res.status(500).end();
+    }
+});
 // handle the pages requests
 app.get('*', function(req, res) {
 

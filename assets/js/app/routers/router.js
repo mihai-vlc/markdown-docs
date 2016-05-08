@@ -1,10 +1,11 @@
 define([
-    'backbone'
-], function(Backbone) {
+    'backbone',
+    'URI'
+], function(Backbone, URI) {
 
     var router = Backbone.Router.extend({
         routes: {
-            'search(/)': 'searchPage',
+            'search(/)': 'searchPages',
             '*others': 'loadPage'
         },
 
@@ -16,8 +17,15 @@ define([
             this.appView.loadPage(pageId);
         },
 
-        searchPage: function() {
-            console.log('searchPage');
+        searchPages: function(queryString) {
+            var params = URI.parseQuery(queryString);
+
+            if (params.q) {
+                this.appView.searchPages(params.q);
+            } else {
+                Backbone.navigate('/', { trigger: true });
+            }
+
         }
 
     });

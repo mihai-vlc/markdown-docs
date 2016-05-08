@@ -26,7 +26,7 @@ define([
 
         handleNavigate: function(event) {
             event.preventDefault();
-            var pageId = $(event.target).attr('href');
+            var pageId = $(event.currentTarget).attr('href');
             if ( ! pageId || pageId == '#') {
                 return;
             }

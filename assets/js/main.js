@@ -8,7 +8,8 @@ require.config({
         'bootstrap': 'libs/bootstrap.min',
         'lobibox': 'libs/lobibox/lobibox.min',
         'messagebox': 'libs/lobibox/messageboxes.min',
-        'inline-attachment': 'libs/inline-attachment'
+        'inline-attachment': 'libs/inline-attachment',
+        'URI': 'app/utils/URI'
     },
 
     shim: {
