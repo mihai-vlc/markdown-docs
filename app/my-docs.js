@@ -5,7 +5,6 @@ var fs = require('fs');
 var stringUtils = require('underscore.string');
 var md = require('markdown-it')(config.markdown);
 var lunr = require('lunr');
-var Repository = require('git-cli').Repository;
 var childProcess = require('child_process');
 
 // markdown plugins
