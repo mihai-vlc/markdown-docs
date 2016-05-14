@@ -17,6 +17,7 @@ define([
 
             app.events.on('pageLoaded', this.activateItem.bind(this));
             app.events.on('pageSaved', this.updateNavigation.bind(this));
+            app.events.on('pageDeleted', this.updateNavigation.bind(this));
         },
 
 

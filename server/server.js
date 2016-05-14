@@ -54,7 +54,6 @@ app.put('/page/:pageId(*)', function(req, res) {
         }
     }
 
-
     if (result) {
         res.json({
             success: true
@@ -62,6 +61,18 @@ app.put('/page/:pageId(*)', function(req, res) {
         return;
     }
     res.status(500).end();
+});
+
+app.delete('/page/:pageId(*)', function(req, res) {
+    var pageId = req.params.pageId;
+
+    if (pageId && mdocs.deletePage(pageId)) {
+        res.json({
+            success: true
+        });
+    } else {
+        res.status(500).end();
+    }
 });
 
 app.get('/loadSearchResults', function(req, res) {
@@ -103,28 +114,6 @@ app.post('/save-page', function(req, res) {
 
 app.post('/commit', function(req, res) {
     if (mdocs.commit()) {
-        res.json({
-            success: true
-        });
-    } else {
-        res.status(500).end();
-    }
-});
-
-app.post('/create-page', function(req, res) {
-
-    if (req.body.pageId && mdocs.createPage(req.body.pageId, req.body.content)) {
-        res.json({
-            success: true
-        });
-    } else {
-        res.status(500).end();
-    }
-});
-
-app.post('/delete-page', function(req, res) {
-
-    if (req.body.pageId && mdocs.deletePage(req.body.pageId)) {
         res.json({
             success: true
         });

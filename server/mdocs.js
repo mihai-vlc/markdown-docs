@@ -211,7 +211,7 @@ function commit() {
         }).toString();
 
         if (status) {
-            childProcess.execSync('git commit -m "Automatic commit by web app"', {
+            childProcess.execSync('git commit -m "Automatic commit by mdocs web app."', {
                 cwd: config.contentFolder
             });
         }
