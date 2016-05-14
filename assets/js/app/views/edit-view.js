@@ -6,7 +6,7 @@ define([
 ], function(Backbone, tpls, ModalView, notify) {
 
     var view = ModalView.extend({
-        template: tpls['edit.html'],
+        template: tpls['page-edit.html'],
 
         initialize: function (options) {
             ModalView.prototype.initialize.apply(this, arguments);
@@ -14,12 +14,14 @@ define([
 
             this.options.pageModel.on('sync', this.updateContent.bind(this));
             this.options.pageModel.on('error', this.handleError.bind(this));
-            Backbone.history.navigate('/edit-page');
         },
 
         updateContent: function(model, data) {
-            if (data.id && data.content) {
+            if (data.id) {
                 this.$('.js-page-id').val(data.id);
+            }
+
+            if (data.content) {
                 this.editorView.setContent(data.content);
             }
         },
@@ -41,19 +43,33 @@ define([
             var pageModel = this.options.pageModel;
             var currentId = this.$('.js-page-id').val().replace(/^\/+/, '');
 
-            pageModel.set('oldId', pageModel.id);
-            pageModel.set('id', currentId);
-            pageModel.set('content', this.editorView.cm.getValue());
+            var oldId = pageModel.id;
 
-            pageModel.save(null, {
+            pageModel.set('id', currentId);
+
+            var data = {
+                oldId: oldId,
+                content: this.editorView.cm.getValue()
+            };
+
+            pageModel.save(data, {
+                wait: true,
                 success: function() {
                     notify.success('The page page was saved successfully !');
 
                     app.events.trigger('pageSaved', pageModel.id);
+
+                    // we need to do this in order to register a change in the route
+                    // and load the new content of the page
+                    Backbone.history.navigate('/', { replace: true });
                     Backbone.history.navigate(pageModel.id, {trigger: true, replace: true});
 
                     this.close();
-                }.bind(this)
+                }.bind(this),
+                error: function() {
+                    // if the save fails reset the id attribute to the old value
+                    pageModel.set('id', oldId);
+                }
             });
 
         },
@@ -72,9 +88,11 @@ define([
                 that.$('.js-page-editor').append(that.editorView.el);
                 that.editorView.render();
 
-                that.options.pageModel.fetch({
-                    data: { format: 'source' }
-                });
+                if (that.options.pageModel.id) {
+                    that.options.pageModel.fetch({
+                        data: { format: 'source' }
+                    });
+                }
             });
         }
     });

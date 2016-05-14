@@ -46,6 +46,11 @@ define([
                     title: 'Edit page',
                     pageModel: new PageModel({ id: Backbone.history.fragment })
                 }).show();
+            } else if (action == 'new-page') {
+                new EditView({
+                    title: 'Create page',
+                    pageModel: new PageModel()
+                }).show();
             }
 
         },

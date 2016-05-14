@@ -172,14 +172,7 @@ function getNavItemLink(file) {
 }
 
 function savePage(oldPageId, pageId, content) {
-    try {
-        deletePage(oldPageId);
-        createPage(pageId, content);
-
-        return true;
-    } catch (e) {
-        return false;
-    }
+    return deletePage(oldPageId) && createPage(pageId, content);
 }
 
 function createPage(pageId, content) {
@@ -197,9 +190,8 @@ function createPage(pageId, content) {
 
 function deletePage(pageId) {
     try {
-        var pagePath = getPagePath(pageId);
-        fs.unlinkSync(pagePath);
 
+        fs.unlinkSync(getPagePath(pageId));
         deleteEmpty.sync(config.contentFolder);
 
         return true;

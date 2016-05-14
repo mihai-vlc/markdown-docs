@@ -13,18 +13,6 @@ return __p
 (function() {
 window["_templates_app_"] = window["_templates_app_"] || {};
 
-window["_templates_app_"]["edit.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '';
-with (obj) {
-__p += '<form action="#">\n    <div class="modal-body js-modal-body">\n\n        <div class="form-group">\n            <label>Page id</label>\n            <input type="text" required title="Please enter a valid file path with no extension"\n                pattern="[a-zA-Z0-9_\\/-]+" class="form-control js-page-id">\n        </div>\n\n        <div class="form-group js-page-editor">\n            <label>Page content</label>\n        </div>\n\n    </div>\n\n    <div class="modal-footer">\n        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n        <button type="submit" class="btn btn-primary">Save</button>\n    </div>\n</form>\n';
-
-}
-return __p
-}})();
-(function() {
-window["_templates_app_"] = window["_templates_app_"] || {};
-
 window["_templates_app_"]["editor.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '';
@@ -87,6 +75,18 @@ __e( item.name ) +
 __p += '\n    </li>\n    ';
  }); ;
 __p += '\n</ul>\n';
+
+}
+return __p
+}})();
+(function() {
+window["_templates_app_"] = window["_templates_app_"] || {};
+
+window["_templates_app_"]["page-edit.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '';
+with (obj) {
+__p += '<form action="#">\n    <div class="modal-body js-modal-body">\n\n        <div class="form-group">\n            <label>Page id</label>\n            <input type="text" required title="Please enter a valid file path with no extension"\n                pattern="[a-zA-Z0-9_\\/-]+" class="form-control js-page-id">\n        </div>\n\n        <div class="form-group js-page-editor">\n            <label>Page content</label>\n        </div>\n\n    </div>\n\n    <div class="modal-footer">\n        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n        <button type="submit" class="btn btn-primary">Save</button>\n    </div>\n</form>\n';
 
 }
 return __p

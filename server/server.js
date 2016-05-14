@@ -44,13 +44,24 @@ app.get('/page/:pageId(*)', function(req, res) {
 });
 
 app.put('/page/:pageId(*)', function(req, res) {
-    if (req.body.id && mdocs.savePage(req.body.oldId, req.body.id, req.body.content)) {
+    var result = false;
+
+    if (req.body.id) {
+        if (req.body.oldId) {
+            result = mdocs.savePage(req.body.oldId, req.body.id, req.body.content);
+        } else {
+            result = mdocs.createPage(req.body.id, req.body.content);
+        }
+    }
+
+
+    if (result) {
         res.json({
             success: true
         });
-    } else {
-        res.status(500).end();
+        return;
     }
+    res.status(500).end();
 });
 
 app.get('/loadSearchResults', function(req, res) {
