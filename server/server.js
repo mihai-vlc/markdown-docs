@@ -37,9 +37,20 @@ app.get('/navigation', function(req, res) {
     }
 });
 
-app.get('/loadPageData/:pageId(*)', function(req, res) {
-    var pageData = mdocs.getPage(req.params.pageId);
+
+app.get('/page/:pageId(*)', function(req, res) {
+    var pageData = mdocs.getPage(req.params.pageId, req.query.format);
     res.json(pageData);
+});
+
+app.put('/page/:pageId(*)', function(req, res) {
+    if (req.body.id && mdocs.savePage(req.body.oldId, req.body.id, req.body.content)) {
+        res.json({
+            success: true
+        });
+    } else {
+        res.status(500).end();
+    }
 });
 
 app.get('/loadSearchResults', function(req, res) {
@@ -124,7 +135,7 @@ app.post('/preview', function(req, res) {
     if (content) {
         res.json({
             success: true,
-            data: mdocs.generatePreview(content)
+            content: mdocs.generatePreview(content)
         });
     } else {
         res.status(500).end();

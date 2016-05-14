@@ -35,7 +35,7 @@ define([
                 el: '.js-app .header'
             }).render();
 
-            this.views.header = new NavigationView({
+            this.views.navigationView = new NavigationView({
                 el: '.js-app .nav-items-list',
                 model: new NavigationModel()
             });

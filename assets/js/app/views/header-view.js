@@ -1,8 +1,10 @@
 define([
     'backbone',
     'templates',
-    'URI'
-], function(Backbone, tpls, URI) {
+    'URI',
+    'app/views/edit-view',
+    'app/models/page-model'
+], function(Backbone, tpls, URI, EditView, PageModel) {
 
     var view = Backbone.View.extend({
         template: tpls['header.html'],
@@ -13,7 +15,15 @@ define([
 
         events: {
             'submit form': 'handleSearch',
-            'click a.js-nav': 'handleNavigate'
+            'click a.js-nav': 'handleNavigate',
+            'click [data-action]': 'handleAction'
+        },
+
+        handleSearch: function(event) {
+            event.preventDefault();
+            var data = $(event.target).serialize();
+
+            Backbone.history.navigate('/search?' + data, { trigger: true });
         },
 
         handleNavigate: function(event) {
@@ -26,12 +36,18 @@ define([
             Backbone.history.navigate(pageId, {trigger: true});
         },
 
-
-        handleSearch: function(event) {
+        handleAction: function(event) {
             event.preventDefault();
-            var data = $(event.target).serialize();
+            var $btn = $(event.currentTarget);
+            var action = $btn.data('action');
 
-            Backbone.history.navigate('/search?' + data, { trigger: true });
+            if (action == 'edit') {
+                new EditView({
+                    title: 'Edit page',
+                    pageModel: new PageModel({ id: Backbone.history.fragment })
+                }).show();
+            }
+
         },
 
         setDefaultQuery: function() {

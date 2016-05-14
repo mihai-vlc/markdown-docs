@@ -4,12 +4,14 @@
   "author": "Mihai Ionut Vilcu <ionutvmi@gmail.com>",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "delete-empty": "^0.1.2",
     "express": "^4.13.3",
     "glob": "^5.0.15",
     "lunr": "^0.6.0",
     "markdown-it": "^5.0.1",
     "markdown-it-checkbox": "^1.1.0",
     "markdown-it-toc": "^1.1.0",
+    "mkdirp": "^0.5.1",
     "multer": "^1.1.0",
     "underscore.string": "^3.2.2"
   },

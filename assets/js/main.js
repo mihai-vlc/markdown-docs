@@ -11,7 +11,11 @@ require.config({
         'inline-attachment': 'libs/inline-attachment',
         'URI': 'app/utils/URI'
     },
-
+    packages: [{
+        name: "codemirror",
+        location: "libs/codemirror",
+        main: "lib/codemirror"
+    }],
     shim: {
         'bootstrap': ['jquery'],
         'prism': {

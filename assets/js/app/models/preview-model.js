@@ -4,12 +4,10 @@ define([
 
     var model = Backbone.Model.extend({
         defaults: {
-            pageTitle: '',
-            content: '',
-            oldId: ''
+            content: ''
         },
         url: function() {
-            return '/page/' + this.id;
+            return '/preview';
         }
     });
 

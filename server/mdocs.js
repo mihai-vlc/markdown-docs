@@ -6,13 +6,15 @@ var stringUtils = require('underscore.string');
 var md = require('markdown-it')(config.markdown);
 var lunr = require('lunr');
 var childProcess = require('child_process');
+var mkdirp = require('mkdirp');
+var deleteEmpty = require('delete-empty');
 
 // markdown plugins
 md.use(require('markdown-it-checkbox'));
 md.use(require('markdown-it-toc'));
 
 
-function getPage(id) {
+function getPage(id, format) {
     if (id === '/') {
         return getHomePage();
     }
@@ -23,8 +25,9 @@ function getPage(id) {
 
     var filePath = getPagePath(id);
     return {
+        id: id,
         pageTitle: path.basename(id),
-        content: getPageContent(filePath, { render: true })
+        content: getPageContent(filePath, { render: format != 'source' })
     };
 }
 
@@ -170,8 +173,8 @@ function getNavItemLink(file) {
 
 function savePage(oldPageId, pageId, content) {
     try {
-        fs.unlinkSync(getPagePath(oldPageId));
-        fs.writeFileSync(getPagePath(pageId), content, 'utf-8');
+        deletePage(oldPageId);
+        createPage(pageId, content);
 
         return true;
     } catch (e) {
@@ -181,7 +184,10 @@ function savePage(oldPageId, pageId, content) {
 
 function createPage(pageId, content) {
     try {
-        fs.writeFileSync(getPagePath(pageId), content, 'utf-8');
+        var pagePath = getPagePath(pageId);
+
+        mkdirp.sync( path.dirname(pagePath) );
+        fs.writeFileSync(pagePath, content, 'utf-8');
 
         return true;
     } catch (e) {
@@ -191,7 +197,10 @@ function createPage(pageId, content) {
 
 function deletePage(pageId) {
     try {
-        fs.unlinkSync(getPagePath(pageId));
+        var pagePath = getPagePath(pageId);
+        fs.unlinkSync(pagePath);
+
+        deleteEmpty.sync(config.contentFolder);
 
         return true;
     } catch (e) {

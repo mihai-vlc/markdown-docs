@@ -16,6 +16,7 @@ define([
             this.model.fetch();
 
             app.events.on('pageLoaded', this.activateItem.bind(this));
+            app.events.on('pageSaved', this.updateNavigation.bind(this));
         },
 
 
@@ -38,16 +39,31 @@ define([
         },
 
         activateItem: function(id) {
+            this.$el.find('a.active').removeClass('active');
+
+            if ( ! id) {
+                return;
+            }
+
             // ensure the id starts with /
             if (id[0] != '/') {
                 id = '/' + id;
             }
 
-            this.$el.find('a.active').removeClass('active');
+            this.activeId = id;
             this.$el.find('a[href="' + id + '"]').addClass('active');
         },
 
+        updateNavigation: function(id) {
+            this.model.fetch();
+        },
+
         initNavigation: function () {
+
+            if (this.activeId) {
+                this.activateItem(this.activeId);
+            }
+
             // collapsable navigation
             this.$('.nav-folder').on('click', function (e) {
                 e.preventDefault();
