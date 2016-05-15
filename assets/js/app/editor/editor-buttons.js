@@ -1,9 +1,9 @@
 /**
  * Module that builds the custom buttons used on the main editor
  */
-define(['app/utils/string-utils'], function (stringUtils) {
+define(['app/utils/string-utils'], function(stringUtils) {
 
-    function addHeading(text) {
+    function addBlockItem(text) {
         return function(cm) {
             var selection = cm.getSelection();
             if (selection) {
@@ -26,7 +26,7 @@ define(['app/utils/string-utils'], function (stringUtils) {
 
 
     function addLabel(name) {
-        return function (cm) {
+        return function(cm) {
             var selection = cm.getSelection();
             cm.replaceSelection(stringUtils.format(labels[name], selection));
 
@@ -37,6 +37,8 @@ define(['app/utils/string-utils'], function (stringUtils) {
         }
     }
 
+
+
     return {
         editBtns: {
             items: [
@@ -46,19 +48,19 @@ define(['app/utils/string-utils'], function (stringUtils) {
                         items: [
                             {
                                 label: '<span class="btn-h1">h1</span>',
-                                callback: addHeading('#')
+                                callback: addBlockItem('#')
                             },
                             {
                                 label: '<span class="btn-h2">h2</span>',
-                                callback: addHeading('##')
+                                callback: addBlockItem('##')
                             },
                             {
                                 label: '<span class="btn-h3">h3</span>',
-                                callback: addHeading('###')
+                                callback: addBlockItem('###')
                             },
                             {
                                 label: '<span class="btn-h4">h4</span>',
-                                callback: addHeading('####')
+                                callback: addBlockItem('####')
                             }
                         ]
                     }
@@ -95,10 +97,18 @@ define(['app/utils/string-utils'], function (stringUtils) {
                     }
                 },
                 {
+                    label: '<i class="glyphicon glyphicon-list"></i>',
+                    callback: addBlockItem('-')
+                },
+                {
+                    label: '<i class="glyphicon glyphicon-check"></i>',
+                    callback: addBlockItem('[ ]')
+                },
+                {
                     hotkey: 'Ctrl-B',
                     title: 'Ctrl-B',
                     label: '<strong>B</strong>',
-                    callback: function (cm) {
+                    callback: function(cm) {
                         var selection = cm.getSelection();
                         cm.replaceSelection('**' + selection + '**');
                         if (!selection) {
@@ -111,7 +121,7 @@ define(['app/utils/string-utils'], function (stringUtils) {
                     hotkey: 'Ctrl-I',
                     title: 'Ctrl-I',
                     label: '<i>I</i>',
-                    callback: function (cm) {
+                    callback: function(cm) {
                         var selection = cm.getSelection();
                         cm.replaceSelection('*' + selection + '*');
                         if (!selection) {
@@ -122,7 +132,7 @@ define(['app/utils/string-utils'], function (stringUtils) {
                 },
                 {
                     label: '&lt;/&gt;',
-                    callback: function (cm) {
+                    callback: function(cm) {
                         var selection = cm.getSelection();
                         if (selection.indexOf('\n') > -1 || ! selection) {
                             cm.replaceSelection("\n```\n" + selection + "\n```\n");
@@ -138,7 +148,7 @@ define(['app/utils/string-utils'], function (stringUtils) {
                 },
                 {
                     label: 'a',
-                    callback: function (cm) {
+                    callback: function(cm) {
                         var selection = cm.getSelection();
                         var text = '';
                         var link = '';
