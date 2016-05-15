@@ -1,0 +1,12 @@
+<h4><%- results.length %> result(s) were found for <strong><%- query %></strong></h4>
+<div class="list-group">
+    <% results.forEach(function(item) { %>
+        <a class="list-group-item" href="<%= item.href %>">
+            <h4 class="list-group-item-heading"><%- item.name %></h4>
+            <div class="list-group-item-text">
+                <%- item.description %>
+                <div class="list-item-info">Last modified: <%- item.date %></div>
+            </div>
+        </a>
+    <% }); %>
+</ul>

@@ -1,0 +1,14 @@
+<ul class="nav-list">
+    <% navItems.forEach(function(item) { %>
+    <li>
+        <a href="<%- item.href %>"  class="<%- item.className %> <%- item.navItems ? 'nav-folder' : '' %>">
+            <%- item.name %>
+        </a>
+        <%
+        if (item.navItems && item.navItems.length) {
+            print(template({ navItems: item.navItems, template: template }))
+        }
+        %>
+    </li>
+    <% }); %>
+</ul>

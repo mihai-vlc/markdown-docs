@@ -1,28 +1,32 @@
 {
-  "name": "my-docs",
-  "version": "1.0.0",
-  "description": "A markdown powered knowledgebase.",
+  "name": "app",
+  "private": true,
+  "author": "Mihai Ionut Vilcu <ionutvmi@gmail.com>",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js"
   },
-  "keywords": [
-    "docs",
-    "viewer",
-    "markdown"
-  ],
-  "author": "Mihai Ionut Vilcu <ionutvmi@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "delete-empty": "^0.1.2",
     "express": "^4.13.3",
     "glob": "^5.0.15",
-    "hogan-express": "^0.5.2",
     "lunr": "^0.6.0",
     "markdown-it": "^5.0.1",
     "markdown-it-checkbox": "^1.1.0",
     "markdown-it-toc": "^1.1.0",
+    "mkdirp": "^0.5.1",
     "multer": "^1.1.0",
     "underscore.string": "^3.2.2"
+  },
+  "devDependencies": {
+    "amd-optimize": "0.6.1",
+    "gulp": "3.9.1",
+    "gulp-add-src": "0.2.0",
+    "gulp-concat": "2.6.0",
+    "gulp-develop-server": "^0.5.1",
+    "gulp-processhtml": "1.1.0",
+    "gulp-ruby-sass": "2.0.6",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-template-compile": "1.1.0"
   }
 }
