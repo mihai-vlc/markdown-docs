@@ -3,6 +3,7 @@ define([
     'templates',
     'codemirror',
     'inline-attachment',
+    'app/editor/editor-buttons',
     'app/utils/notify',
 
     // editor addons
@@ -14,7 +15,7 @@ define([
     'codemirror/addon/selection/selection-pointer',
     'codemirror/addon/codemirror-buttons',
     'codemirror/addon/display/fullscreen'
-], function(Backbone, tpls, CodeMirror, inlineAttachment, notify) {
+], function(Backbone, tpls, CodeMirror, inlineAttachment, editorButtons, notify) {
 
     var view = Backbone.View.extend({
         template: tpls['editor.html'],
@@ -91,6 +92,8 @@ define([
                     }
                 }
             });
+
+            this.cm.setOption('buttons', editorButtons);
 
             if (this.pageContent) {
                 this.cm.setValue(this.pageContent);

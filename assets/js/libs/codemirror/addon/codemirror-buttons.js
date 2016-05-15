@@ -41,7 +41,7 @@
 
     function createGroup(cm, config) {
         var items = config.items || [];
-        var groupNode = document.createElement('div');
+        var groupNode = document.createElement('ul');
 
         if (config.className) {
             groupNode.className = config.className;
@@ -56,9 +56,9 @@
     }
 
     function createButton(cm, config) {
-        var buttonNode = document.createElement('button');
+        var li = document.createElement('li');
+        var buttonNode = document.createElement('a');
         buttonNode.innerHTML = config.label;
-        buttonNode.setAttribute('type', 'button');
         buttonNode.setAttribute('tabindex', '-1');
 
         if (config.callback) {
@@ -83,6 +83,12 @@
             cm.addKeyMap(map);
         }
 
-        return buttonNode;
+        li.appendChild(buttonNode);
+
+        if (config.subitems) {
+            li.appendChild(createGroup(cm, config.subitems));
+        }
+
+        return li;
     }
 });

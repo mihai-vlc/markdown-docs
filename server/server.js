@@ -131,15 +131,11 @@ app.post('/upload', upload.single('file'), function(req, res) {
 
 // handle the preview request
 app.post('/preview', function(req, res) {
-    var content = req.body.content;
-    if (content) {
-        res.json({
-            success: true,
-            content: mdocs.generatePreview(content)
-        });
-    } else {
-        res.status(500).end();
-    }
+    var content = req.body.content || '';
+    res.json({
+        success: true,
+        content: mdocs.generatePreview(content)
+    });
 });
 
 

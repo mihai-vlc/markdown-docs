@@ -168,18 +168,60 @@ body {
     background: #fff;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
+    z-index: 100000;
 }
 
-.CodeMirror-buttonsPanel button {
-    background: none;
-    border: 0;
-    outline: 0;
-    padding: 5px 10px;
-}
+.CodeMirror-buttonsPanel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-.CodeMirror-buttonsPanel button:hover {
-    color: blue;
-    background: #f0f0f0;
+    ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 10;
+        background: #fff;
+
+        border: 1px solid #e2e2e2;
+        // box-shadow: 0 0 1px #ccc;
+
+        ul {
+            top: -1px;
+            left: 100%;
+        }
+
+        li {
+            display: block;
+        }
+    }
+
+    > li {
+        display: inline-block;
+        position: relative;
+        text-align: left;
+
+    }
+
+    li:hover > ul {
+        display: block;
+    }
+
+    a {
+        display: block;
+        padding: 5px 10px;
+        color: #000;
+        cursor: pointer;
+        outline: none;
+        white-space: nowrap;
+    }
+
+    a:hover {
+        color: blue;
+        background: #f0f0f0;
+        text-decoration: none;
+    }
 }
 
 /* Preview area */
