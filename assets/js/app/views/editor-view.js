@@ -5,6 +5,7 @@ define([
     'inline-attachment',
     'app/editor/editor-buttons',
     'app/utils/notify',
+    'prism',
 
     // editor addons
     'codemirror/keymap/sublime',
@@ -35,6 +36,14 @@ define([
 
         updatePreview: function() {
             this.$preview.html(this.previewModel.get('content'));
+
+            // make all external links open in a new window
+            this.$preview.find('a').filter(function() {
+                return this.hostname != window.location.hostname;
+            }).attr('target', '_blank');
+
+            // highlight the code areas
+            Prism.highlightAll();
         },
 
         setContent: function(content) {
