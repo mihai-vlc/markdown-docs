@@ -31,7 +31,8 @@ define([
             // initialize the modal
             this.$modalEl.modal({
                 show: false,
-                keyboard: false
+                keyboard: false,
+                backdrop: 'static'
             });
 
             this.$modalEl.on('shown.bs.modal', function() {
