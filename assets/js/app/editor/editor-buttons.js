@@ -86,8 +86,8 @@ define(['app/utils/string-utils'], function(stringUtils) {
                                 callback: addLabel('info')
                             },
                             {
-                                label: 'waring',
-                                callback: addLabel('waring')
+                                label: 'warning',
+                                callback: addLabel('warning')
                             },
                             {
                                 label: 'danger',
