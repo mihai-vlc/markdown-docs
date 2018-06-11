@@ -1,48 +1,6 @@
-# Welcome to MyDocs
-
-MyDocs is a markdown powered knowledgebase.  
-This is meant to allow for an organized and searchable personal documentation.
-
-@[toc](Table of Contents)
-
-### Features
-- collapsable sidebar
-- create/edit/detele pages from the web interface
-- commit changes from the web interface
-- search in the provided content
-- sidebar with a tree view of the documents
-- upload via drag&drop or paste
-- auto table of contents
-
-### Installation
-
-Clone this repo, install the node modules and create the content folder.
-```bash
-git clone https://github.com/ionutvmi/my-docs.git
-cd my-docs
-npm install
-mkdir content
-cd content
-git init
-```
-
-After that you can add your own md files in the content folder.  
-
-
-### How to use ?
-
-In order to view the content from the documentation you need to
-place your markdown files (.md) into the `/content` folder.
-
-To start the server cd into the root location of this application and
-run `npm start`.
-
-It is recommended that you keep the `/content` folder in a separate git repo thus
-taking advantage of the version control for all your content.
-
-The /content folder may contain a subfolder named `UPLOADS` which will be ignored
-form the indexing in order to allow for static files (images, documents) to be linked
-your documentation.
+# Operationals Run Books
+## Run Books Templates
+The files in [content/templates/](https://stash.corp.blablacar.com/projects/ADMIN/repos/ops-run-book/browse/content/templates/) are markdown templates built by [runbookcollab.info](http://runbookcollab.info/) and available on [GitHub](https://github.com/SkeltonThatcher/run-book-template).
 
 
 ## Quick reference
