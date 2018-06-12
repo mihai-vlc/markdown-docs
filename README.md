@@ -1,49 +1,50 @@
-# Welcome to MyDocs
+# Operationals Run Books
+## Run Books Templates
+The files in [content/templates/](https://stash.corp.blablacar.com/projects/ADMIN/repos/ops-run-book/browse/content/templates/) are markdown templates built by [runbookcollab.info](http://runbookcollab.info/) and available on [GitHub](https://github.com/SkeltonThatcher/run-book-template).
 
-MyDocs is a markdown powered knowledgebase.  
-This is meant to allow for an organized and searchable personal documentation.
+## Howto
+### Initialize
+Create a "product" directory in`run-books`
 
-@[toc](Table of Contents)
-
-### Features
-- collapsable sidebar
-- create/edit/detele pages from the web interface
-- commit changes from the web interface
-- search in the provided content
-- sidebar with a tree view of the documents
-- upload via drag&drop or paste
-- auto table of contents
-
-### Installation
-
-Clone this repo, install the node modules and create the content folder.
-```bash
-git clone https://github.com/ionutvmi/my-docs.git
-cd my-docs
-npm install
-mkdir content
-cd content
-git init
+```
+mkdir run-books/cassandra
 ```
 
-After that you can add your own md files in the content folder.  
+Copy the `operational-tasks.md` template
 
+```
+cp templates/operational-tasks.md run-books/cassandra
+```
 
-### How to use ?
+### Write you run books
+Fill up the sections (at least **Troubleshooting** and **Routine and sanity checks**)
 
-In order to view the content from the documentation you need to
-place your markdown files (.md) into the `/content` folder.
+```
+## Troubleshooting
+#### A node shutdown for less than 3 hours
+- Just start back the service
+```
 
-To start the server cd into the root location of this application and
-run `npm start`.
+### Add shortcuts
+Fill the **Shortcuts** with local links (HTLML Anchor Tags)
 
-It is recommended that you keep the `/content` folder in a separate git repo thus
-taking advantage of the version control for all your content.
+**What to do when**: List of local links to specific runbooks to run in stressful situations (on call)
 
-The /content folder may contain a subfolder named `UPLOADS` which will be ignored
-form the indexing in order to allow for static files (images, documents) to be linked
-your documentation.
+**How do I**: List of local links to general administration texts that explain how to perform different administration tasks.
 
+Add your anchor tag (\<a name=""">\</a>):
+```
+## Troubleshooting
+#### <a name="trouble1"></a> A node shutdown for less than 3 hours
+- Just start back the service
+```
+
+Create a local link:
+```
+## Shortcuts
+### What to do when...
+- [A node shutdown for less than 3 hours](#trouble1)
+```
 
 ## Quick reference
 
