@@ -2,6 +2,49 @@
 ## Run Books Templates
 The files in [content/templates/](https://stash.corp.blablacar.com/projects/ADMIN/repos/ops-run-book/browse/content/templates/) are markdown templates built by [runbookcollab.info](http://runbookcollab.info/) and available on [GitHub](https://github.com/SkeltonThatcher/run-book-template).
 
+## Howto
+### Initialize
+Create a "product" directory in`run-books`
+
+```
+mkdir run-books/cassandra
+```
+
+Copy the `operational-tasks.md` template
+
+```
+cp templates/operational-tasks.md run-books/cassandra
+```
+
+### Write you run books
+Fill up the sections (at least **Troubleshooting** and **Routine and sanity checks**)
+
+```
+## Troubleshooting
+#### A node shutdown for less than 3 hours
+- Just start back the service
+```
+
+### Add shortcuts
+Fill the **Shortcuts** with local links (HTLML Anchor Tags)
+
+**What to do when**: List of local links to specific runbooks to run in stressful situations (on call)
+
+**How do I**: List of local links to general administration texts that explain how to perform different administration tasks.
+
+Add your anchor tag (\<a name=""">\</a>):
+```
+## Troubleshooting
+#### <a name="trouble1"></a> A node shutdown for less than 3 hours
+- Just start back the service
+```
+
+Create a local link:
+```
+## Shortcuts
+### What to do when...
+- [A node shutdown for less than 3 hours](#trouble1)
+```
 
 ## Quick reference
 
